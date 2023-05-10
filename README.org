@@ -1,0 +1,46 @@
+* Seeds
+
+This is a simple library that intends to make it convenient to create
+new projects or modules from the REPL, in order to quickly test out
+new ideas ("seeds"). It is built on top of Quickproject.
+
+Add the following (modify as necessary) to your lisp init file to load
+the library and set up default values. Ideally ASDF should be set up
+to scan the seed directory for ASD files.
+
+: (require :seeds)
+: 
+: (setf seeds:*seed-directory* "/home/user/lisp/seeds/"
+:       seeds:*seed-template-directory* "/home/user/lisp/seed-templates/"
+:       seeds:*depends-on* '(:alexandria)
+:       seeds:*default-template* :basic)
+
+Example: 
+
+Assume we have our templates set up like this:
+
+:  seed-templates/
+:    basic/
+:      system.asd
+:      application.lisp
+:    cli-app/
+:      ...
+:    web-app/
+:      ...
+
+Then calling
+
+~(seeds:create-seed "foo" :template :basic)~ 
+
+will create a new project called "foo" in our seed directory. The
+project can be moved elsewhere later if it turns out to be useful or
+deleted if it didn't work out.
+
+The result would look like this:
+
+:  seeds/
+:    foo/               * (created)
+:      foo.asd          * (created)
+:      foo.lisp         * (created)
+       
+
