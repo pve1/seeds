@@ -22,8 +22,8 @@
                      *default-pathname-defaults*)
              *default-pathname-defaults*)))
 
-(defmethod Interpret-template-to-path (template)
-  (typecase template
+(defmethod interpret-template-to-path (template)
+  (etypecase template
     (symbol (concatenate 'string
                          (string-downcase (string template))
                          "/"))
