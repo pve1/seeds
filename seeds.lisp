@@ -22,7 +22,6 @@
 :ERROR -> Signal an error.
 NIL -> Proceed silently, possibly overwriting some files.")
 
-
 (defun ensure-suffix (suffix string)
   (if (alexandria:ends-with-subseq suffix string)
       string
@@ -59,7 +58,6 @@ Example:
 
   (seeds:create-seed \"my-app\" :template :basic)
 "
-
   ;; Check seed-directory
   (setf seed-directory (check-seed-directory seed-directory))
   ;; Use quicklisp default template if none was specified.
