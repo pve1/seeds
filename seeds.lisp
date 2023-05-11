@@ -36,7 +36,9 @@
                               (seed-directory *seed-directory*)
                               (template-directory *seed-template-directory*)
                               (if-exists *if-exists*))
+  ;; Check seed-directory
   (setf seed-directory (check-seed-directory seed-directory))
+  ;; Use quicklisp default template if none was specified.
   (when (null template)
     (setf template quickproject:*template-directory*
           template-directory #P""))
@@ -52,15 +54,19 @@
            (cons parameter-function quickproject:*template-parameter-functions*))
          (quickproject:*template-directory* the-template-dir)
          (*default-pathname-defaults* (pathname seed-directory)))
+    ;; Check template-dir
     (unless (probe-file the-template-dir)
       (error "Template directory ~S does not exist." the-template-dir))
+    ;; Check target-dir
     (when (probe-file target-dir)
       (case if-exists
         (:ask (y-or-n-p "Target directory ~S already exists, continue?" target-dir))
         (:error (error "Target directory ~S already exists." target-dir))
         (t nil)))
+    ;; Go!
     (format t "Using template: ~S~%" template-path)
     (quickproject:make-project (ensure-suffix "/" name)
                                :depends-on depends-on)
+    ;; Load the new system?
     (when load
       (funcall (find-symbol "LOAD-SYSTEM" :asdf) name))))
