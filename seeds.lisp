@@ -24,9 +24,7 @@
 
 (defun interpret-template-to-path (template)
   (etypecase template
-    (symbol (concatenate 'string
-                         (string-downcase (string template))
-                         "/"))
+    (symbol (ensure-suffix "/" (string-downcase (string template))))
     (string (ensure-suffix "/" (string template)))
     (pathname (ensure-suffix "/" (namestring template)))))
 
