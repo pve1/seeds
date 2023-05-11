@@ -3,11 +3,25 @@
   (in-package :seeds)
   (setf *readtable* (capitalized-export:make-capitalized-export-readtable)))
 
-(defvar *Seed-directory* nil)
-(defvar *Seed-template-directory* nil)
-(defvar *Depends-on* '())
-(defvar *Default-template* nil)
-(defvar *If-exists* :ask)
+(defvar *Seed-directory* nil
+  "Newly created seed projects go here.")
+
+(defvar *Seed-template-directory* nil
+  "A directory containing quickproject templates.")
+
+(defvar *Depends-on* '()
+  "The default dependencies of new projects.")
+
+(defvar *Default-template* nil
+  "The default template when creating a new project.")
+
+(defvar *If-exists* :ask
+  "What to do if the target project directory exists. One of:
+
+:ASK -> Ask the user how to proceed.
+:ERROR -> Signal an error.
+NIL -> Proceed silently, possibly overwriting some files.")
+
 
 (defun ensure-suffix (suffix string)
   (if (alexandria:ends-with-subseq suffix string)
@@ -34,6 +48,13 @@
                               (seed-directory *seed-directory*)
                               (template-directory *seed-template-directory*)
                               (if-exists *if-exists*))
+
+"Creates a new seed project called NAME in the directory
+SEED-DIRECTORY. The project will be created using a template named
+TEMPLATE, which should be a sub-directory of the directory
+TEMPLATE-DIRECTORY (which can contain many templates). TEMPLATE should
+be a valid quickproject template. If TEMPLATE is NIL, the default
+quickproject template will be used."
   ;; Check seed-directory
   (setf seed-directory (check-seed-directory seed-directory))
   ;; Use quicklisp default template if none was specified.
