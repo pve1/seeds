@@ -48,8 +48,7 @@ NIL -> Proceed silently, possibly overwriting some files.")
                               (seed-directory *seed-directory*)
                               (template-directory *seed-template-directory*)
                               (if-exists *if-exists*))
-
-"Creates a new seed project called NAME in the directory
+  "Creates a new seed project called NAME in the directory
 SEED-DIRECTORY. The project will be created using a template named
 TEMPLATE, which should be a sub-directory of the directory
 TEMPLATE-DIRECTORY (which can contain many templates). TEMPLATE should
