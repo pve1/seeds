@@ -22,7 +22,7 @@
                      *default-pathname-defaults*)
              *default-pathname-defaults*)))
 
-(defmethod interpret-template-to-path (template)
+(defun interpret-template-to-path (template)
   (etypecase template
     (symbol (concatenate 'string
                          (string-downcase (string template))
