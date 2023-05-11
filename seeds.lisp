@@ -53,7 +53,13 @@ SEED-DIRECTORY. The project will be created using a template named
 TEMPLATE, which should be a sub-directory of the directory
 TEMPLATE-DIRECTORY (which can contain many templates). TEMPLATE should
 be a valid quickproject template. If TEMPLATE is NIL, the default
-quickproject template will be used."
+quickproject template will be used.
+
+Example:
+
+  (seeds:create-seed \"my-app\" :template :basic)
+"
+
   ;; Check seed-directory
   (setf seed-directory (check-seed-directory seed-directory))
   ;; Use quicklisp default template if none was specified.
