@@ -82,7 +82,9 @@ Example:
     ;; Check target-dir
     (when (probe-file target-dir)
       (case if-exists
-        (:ask (y-or-n-p "Target directory ~S already exists, continue?" target-dir))
+        (:ask (unless (y-or-n-p "Target directory ~S already exists, continue?"
+                                target-dir)
+                (return-from create-seed nil)))
         (:error (error "Target directory ~S already exists." target-dir))
         (t nil)))
     ;; Go!
