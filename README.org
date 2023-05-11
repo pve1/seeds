@@ -1,7 +1,7 @@
 * Seeds
 
 This is a simple library that intends to make it convenient to create
-new projects or modules from the REPL, in order to quickly test out
+new projects or modules from the REPL in order to quickly test out
 new ideas ("seeds"). It is built on top of Quickproject.
 
 Add the following (modify as necessary) to your lisp init file to load
